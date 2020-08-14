@@ -3,10 +3,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  id:{
-    type: String,
-    required: true,
-  },
   First_name: {
     type: String,
     required: true,
@@ -67,6 +63,11 @@ const userSchema = new Schema({
       ref: "Farm",
     },
   ],Own_Share: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Stock",
+    },
+  ],Own_Wage: [
     {
       type: Schema.Types.ObjectId,
       ref: "Stock",

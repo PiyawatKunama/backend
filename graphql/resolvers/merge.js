@@ -14,6 +14,7 @@ const user = async (userId) => {
       stock_holdings: stocks.bind(this, user._doc.stock_holdings),
       Own_farm: farms.bind(this, user._doc.Own_farm),
       Own_stock: shares.bind(this, user._doc.Own_stock),
+      Own_wage: wages.bind(this, user._doc.Own_wage),
     };
   } catch (err) {
     throw err;
@@ -36,6 +37,16 @@ const shares = async (shareIds) => {
     const shares = await Share.find({ _id: { $in: shareIds } });
     return shares.map((share) => {
       return showShareInfo(share);
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+const wages = async (wageIds) => {
+  try {
+    const wages = await Wage.find({ _id: { $in: wageIds } });
+    return wages.map((wage) => {
+      return showWageInfo(wage);
     });
   } catch (err) {
     throw err;
@@ -82,20 +93,7 @@ const showUserInfo = (user) => {
     stock_holdings: stocks.bind(this, user._doc.stock_holdings),
     Own_farm: farms.bind(this, user._doc.Own_farm),
     Own_stock: shares.bind(this, user._doc.Own_stock),
-  };
-};
-
-const showOfficerInfo = (officer) => {
-  return {
-    ...officer._doc,
-    _id: officer._id,
-  };
-};
-
-const showAutoIdInfo = (user) => {
-  return {
-    ...user._doc,
-    _id: user._id,
+    Own_wage: wages.bind(this, user._doc.Own_wage),
   };
 };
 
@@ -114,13 +112,26 @@ const showShareInfo = (share) => {
     Share_owner: user.bind(this, share.Share_owner),
   };
 };
-
+const showWageInfo = (wage) => {
+  return {
+    ...wage._doc,
+    _id: wage._id,
+    Wage_owner: user.bind(this, wage.Wage_owner),
+  };
+};
 
 const showStockInfo = (stock) => {
   return {
     ...stock._doc,
     _id: stock.id,
     date: dateToString(stock._doc.date),
+  };
+};
+
+const showOfficerInfo = (officer) => {
+  return {
+    ...officer._doc,
+    _id: officer.id,
   };
 };
 
@@ -134,9 +145,9 @@ const showSellingStockInfo = (sellingStock) => {
     updatedAt: dateToString(sellingStock._doc.updatedAt),
   };
 };
-exports.showOfficerInfo=showOfficerInfo;
+exports.showOfficerInfo = showFarmInfo;
 exports.showFarmInfo = showFarmInfo;
-exports.showAutoIdInfo = showAutoIdInfo;
+exports.showWageInfo = showWageInfo;
 exports.showShareInfo = showShareInfo;
 exports.showStockInfo = showStockInfo;
 exports.showUserInfo = showUserInfo;

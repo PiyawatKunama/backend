@@ -30,8 +30,15 @@ mutation {
 
 
 mutation {
-  updateShare( shareId: "5f129941adcafb2570a935de",shareInput: {Value: 60, Count: 2, Num_start: 1, Date: "2020-07-18T05:26:20.116Z", Status: true, Share_owner: "5f126360b6bb9146d4f6de99"}) {
+  updateShare(shareId: "5f15f2adecc91d0f74fff092", shareInput: {Value: 60, Count: 2, Num_start: 1, Date: "2020-07-18T05:26:20.116Z", Status: false, Share_owner: "5f14f730c257a933142383ba"}) {
     Status
+  }
+}
+
+mutation {
+  updateOfficer( OfficerId: "5f3394a52dbbae35a0806493",OfficerInput: {id:"222",name_office:"222",lastname_office:"221",birthday_office:"2020-08-10",idcard_office:"222",email_office:"222",email_office:"222",username_office:"222",password_office:"222",tellnumber_office:"222",tellnumber_office2:"222",facebook_office:"222",line_office:"222",position:"222",type_wage:"222",bank:"222",bankId:"222",banktype:"222",wage:2,socialsecurity:"1579965",sspersen:45,taxnum:"54564",texpersen:65)) {
+    Value
+    
   }
 }
 
@@ -41,63 +48,15 @@ query{
   }
 }
 
-mutation{
-  createOfficer(officerInput:{id:1,name_office:"piyawat",lastname_office:"kunama",birthday_office:"2020-07-09",idcard_office:"1579900786151",email_office:"piyavuh@gmail.com",username_office:"piyavuh",password_office:"Mj085",tellnumber_office:"0650709347",tellnumber_office2:"0946651070",facebook_office:"JimmyPiyawat",line_office:"Jimmy",position:"admin",type_wage:"month",bank:"Kongthai",bankId:"1111111",banktype:"fixed",wage:20000}){
-    _id
-    id
-    name_office
-    lastname_office
-    birthday_office
-    idcard_office
-    email_office
-    username_office
-    password_office
-    tellnumber_office
-    tellnumber_office2
-    facebook_office
-    line_office
-    position
-    type_wage
-    bank
-    bankId
-    banktype
-    wage
-  }
-}
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin https://gitlab.com/Kunama/farm_frontend.git
+git push -u origin --all
+git push -u origin --tags
 
 
 mutation {
-  createShare(shareInput: {Value: 22, Count: 4, Num_start: 1, Date: "2020-07-03T11:26:00.000+00:00", Status: false, Share_owner: "5f14f730c257a933142383ba"}) {
-    Value
-    Count
-    Num_start
+  updateOfficer( OfficerId: "5f3394a52dbbae35a0806493",OfficerInput: {id:222,name_office:"222",lastname_office:"221",birthday_office:"2020-08-10",idcard_office:"222",email_office:"222",username_office:"222",password_office:"222",tellnumber_office:"222",tellnumber_office2:"222",facebook_office:"222",line_office:"222",position:"222",type_wage:"222",bank:"222",bankId:"222",banktype:"222",wage:2,socialsecurity:"1579965",sspersen:45,taxnum:"54564",texpersen:65}) {
+    _id
   }
 }
-
-
-
-จำนวนวันขาดงาน
-จำนวนชั่วโมงมาสาย
-
-date
-
-
-query all share_own
-
-
-
-cd existing_folder
-git init
-git remote add origin https://gitlab.com/Kunama/backend_farm.git
-git add .
-git commit -m "Initial commit"
-git push -u origin master
-
-
-cd existing_folder
-git init
-git remote add origin https://gitlab.com/Kunama/frontend_farm.git
-git add .
-git commit -m "Initial commit"
-git push -u origin master
-

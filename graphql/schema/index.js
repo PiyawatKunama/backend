@@ -8,19 +8,17 @@ module.exports = buildSchema(`
     createdAt: String!
     updatedAt: String!
   }
-
   type Stock {
     _id: ID!
     value: Float!
     date: String!
     owner :User!
   }
-        
+  
   type AutoId{
     _id: ID!
     memberId: Float!
   }
-
   type User {
     _id: ID!
     id : String!
@@ -39,9 +37,8 @@ module.exports = buildSchema(`
     stock_holdings:[Stock!]
     Own_farm:[Farm!]
     Own_Share:[Share!]
-  
+    Own_Wage:[Wage!]
   }
-
   type Officer{
     _id: ID!
     id : Float!
@@ -62,8 +59,11 @@ module.exports = buildSchema(`
     bankId : String!
     banktype : String!
     wage : Float!
+    socialsecurity: String
+    sspersen : Float
+    taxnum : String
+    texpersen : Float
   }
-
   type Farm{
     _id: ID!
     Farm_number: String!
@@ -75,32 +75,38 @@ module.exports = buildSchema(`
     Farm_canton: String!
     Farm_District: String!
     Farm_Province: String!
-    
   }
-
   type Share{
     _id: ID!
     Value: Float!
     Count: Float!
     Num_start: Float!
     Status: Boolean!
-    Date: String!
+    Date: String! 
     Share_owner: User!
   }
- 
-
+  type Wage{
+    _id: ID!
+    Total_Value: Float!
+    Wage_owner: User!
+  }
   type AuthData {
     userId: ID!
     token: String!
     tokenExpiration: Int!
+  }
 
+  type AuthDataoff {
+    userId: ID!
+    positionId : String!
+    token: String!
+    tokenExpiration: Int!
   }
 
   input StockInput{
     value:Float!
     date:String! 
   }
-
   input OfficerInput{
     id : Float!
     name_office : String!
@@ -120,8 +126,11 @@ module.exports = buildSchema(`
     bankId : String!
     banktype : String!
     wage : Float!
+    socialsecurity: String
+    sspersen : Float
+    taxnum : String
+    texpersen : Float
   }
-
   input FarmInput{
     Farm_number: String!
     Farm_Village: String
@@ -134,7 +143,6 @@ module.exports = buildSchema(`
     Farm_Province: String!
     Farm_owner:String!
   }
-
   input ShareInput{
     Value: Float!
     Count: Float!
@@ -142,6 +150,11 @@ module.exports = buildSchema(`
     Date: String!
     Status: Boolean!
     Share_owner:String!
+  } 
+  
+  input WageInput{
+    Total_Value: Float!
+    Wage_owner: String!
   }
   
   input UserInput{
@@ -162,7 +175,6 @@ module.exports = buildSchema(`
   input AutoIdInput{
     memberId: Float!
   }
-
   type RootQuery {
     stocks: [Stock!]!
     autoIds : [AutoId]
@@ -174,10 +186,9 @@ module.exports = buildSchema(`
     login(Username: String!, Password: String!): AuthData!
     oneuser(Username: String!): User
     oneshare(Status: Boolean!): Share
-    login_off(id: String!, password: String!): AuthData!
+    login_off(username_office: String!, password_office: String!): AuthDataoff!
     oneuser_name(First_name: String!): User
   }
-
   type RootMutation {
     createStock( memberId: Float!): Stock
     createAutoId(autoIdInput:AutoIdInput!):AutoId
@@ -187,8 +198,9 @@ module.exports = buildSchema(`
     createOfficer(officerInput:OfficerInput): Officer
     createFarm(farmInput:FarmInput):Farm
     createShare(shareInput:ShareInput): Share
+    createWage(wageInput:WageInput): Wage
     updateShare( shareInput:ShareInput,  shareId:String!): Share
-   
+    updateOfficer( OfficerInput:OfficerInput,  OfficerId:String!): Share
   }
   schema {
     query: RootQuery

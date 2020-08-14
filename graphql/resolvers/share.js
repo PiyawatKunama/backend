@@ -7,7 +7,6 @@ module.exports = {
   shares: async () => {
     try {
       const shares = await Share.find();
-     
       return shares.map((share) => {
         return showShareInfo(share);
       });

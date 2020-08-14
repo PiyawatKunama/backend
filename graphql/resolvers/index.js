@@ -4,8 +4,7 @@ const sellingStockResolver = require("./sellingStock");
 const officerResolver = require("./officer");
 const farmResolver = require("./Farm");
 const shareResolver = require("./share")
-const autoIdResolver = require("./autoId")
-
+const wageResolver = require("./wage")
 const rootResolver = {
   ...authResolver,
   ...stockResolver,
@@ -13,7 +12,7 @@ const rootResolver = {
   ...officerResolver,
   ...farmResolver,
   ...shareResolver,
-  ...autoIdResolver
+  ...wageResolver
 };
 
 module.exports = rootResolver;

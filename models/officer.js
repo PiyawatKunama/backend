@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
-
 const officerSchema = new Schema({
   id : {
     type: Number,
@@ -59,7 +57,18 @@ const officerSchema = new Schema({
   },wage: {
     type: Number,
     required: true
-  },
+  },socialsecurity: {
+    type: String,
+    required: false
+  },sspersen:{
+    type: Number,
+    required: false
+  },taxnum:{
+    type: String,
+    required: false
+  },texpersen:{
+    type: Number,
+    required: false
+  }
 });
-
 module.exports = mongoose.model('Officer', officerSchema);

@@ -5,15 +5,6 @@ const User = require("../../models/user");
 
 const { showUserInfo } = require("./merge");
 
-function getValueForNextSequence(sequenceOfName) {
-  var sequenceDoc = db.sample.findAndModify({
-    query: { _id: sequenceOfName },
-    update: { $inc: { sequence_value: 1 } },
-    new: true,
-  });
-
-  return sequenceDoc.sequence_value;
-}
 module.exports = {
   users: async () => {
     try {
@@ -36,21 +27,15 @@ module.exports = {
       throw err;
     }
   },
-  oneuser: async ({ Username }) => {
+  oneuser: async ({ Username}) => {
     const user = await User.findOne({ Username: Username });
     if (!user) {
       throw new Error("User does not exist!");
     }
-
-    return showUserInfo(user);
-  },oneuser_name: async ({ First_name }) => {
-    const user = await User.findOne({ First_name: First_name });
-    if (!user) {
-      throw new Error("User does not exist!");
-    }
-
+    
     return showUserInfo(user);
   },
+ 
 
   createUser: async (args) => {
     try {
@@ -61,7 +46,6 @@ module.exports = {
       const hashedPassword = await bcrypt.hash(args.userInput.Password, 12);
 
       const user = new User({
-        id: args.userInput.id,
         First_name: args.userInput.First_name,
         Last_name: args.userInput.Last_name,
         Sex: args.userInput.Sex,
