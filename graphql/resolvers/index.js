@@ -5,6 +5,7 @@ const officerResolver = require("./officer");
 const farmResolver = require("./Farm");
 const shareResolver = require("./share")
 const wageResolver = require("./wage")
+
 const rootResolver = {
   ...authResolver,
   ...stockResolver,

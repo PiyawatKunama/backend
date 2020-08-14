@@ -56,36 +56,6 @@ module.exports = {
       throw err;
     }
   },
-  login_off: async ({ username_office, password_office }) => {
-    const officer = await Officer.findOne({ username_office: username_office });
-    if (!officer) {
-      throw new Error("Officer does not exist!");
-    }
-    const isEqual = await bcrypt.compare(
-      password_office,
-      officer.password_office
-    );
-    if (!isEqual) {
-      throw new Error("Password is incorrect!");
-    }
-    const token = jwt.sign(
-      {
-        userId: officer.username_office,
-        positionId: officer.position,
-        username_office: officer.username_office,
-      },
-      "somesupersecretkey",
-      {
-        expiresIn: "1h",
-      }
-    );
-    return {
-      userId: officer.username_office,
-      positionId: officer.position,
-      token: token,
-      tokenExpiration: 1,
-    };
-  },
   updateOfficer: async (args, { OfficerId }) => {
     console.log(args);
     console.log(args.OfficerId);
@@ -119,5 +89,35 @@ module.exports = {
     }
 
     return showOfficerInfo(officer);
+  },
+  login_off: async ({ username_office, password_office }) => {
+    const officer = await Officer.findOne({ username_office: username_office });
+    if (!officer) {
+      throw new Error("Officer does not exist!");
+    }
+    const isEqual = await bcrypt.compare(
+      password_office,
+      officer.password_office
+    );
+    if (!isEqual) {
+      throw new Error("Password is incorrect!");
+    }
+    const token = jwt.sign(
+      {
+        userId: officer.username_office,
+        positionId: officer.position,
+        username_office: officer.username_office,
+      },
+      "somesupersecretkey",
+      {
+        expiresIn: "1h",
+      }
+    );
+    return {
+      userId: officer.username_office,
+      positionId: officer.position,
+      token: token,
+      tokenExpiration: 1,
+    };
   },
 };

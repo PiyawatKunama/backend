@@ -52,6 +52,7 @@ cd existing_repo
 git remote rename origin old-origin
 git remote add origin https://gitlab.com/Kunama/farm_frontend.git
 git push -u origin --all
+
 git push -u origin --tags
 
 
@@ -60,3 +61,10 @@ mutation {
     _id
   }
 }
+mutation{
+  createWage(wageInput:{Total_Value:1555,Wage_owner:"5f172867f8bd7543000fd2a9"}){
+    _id
+    Total_Value
+  }
+}
+git push -u origin --tags

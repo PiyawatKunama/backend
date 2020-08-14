@@ -14,7 +14,7 @@ module.exports = buildSchema(`
     date: String!
     owner :User!
   }
-  
+
   type AutoId{
     _id: ID!
     memberId: Float!
@@ -38,6 +38,7 @@ module.exports = buildSchema(`
     Own_farm:[Farm!]
     Own_Share:[Share!]
     Own_Wage:[Wage!]
+
   }
   type Officer{
     _id: ID!
@@ -85,11 +86,13 @@ module.exports = buildSchema(`
     Date: String! 
     Share_owner: User!
   }
+
   type Wage{
     _id: ID!
     Total_Value: Float!
     Wage_owner: User!
   }
+
   type AuthData {
     userId: ID!
     token: String!
@@ -156,7 +159,6 @@ module.exports = buildSchema(`
     Total_Value: Float!
     Wage_owner: String!
   }
-  
   input UserInput{
     id: String!
     First_name: String!
@@ -201,6 +203,7 @@ module.exports = buildSchema(`
     createWage(wageInput:WageInput): Wage
     updateShare( shareInput:ShareInput,  shareId:String!): Share
     updateOfficer( OfficerInput:OfficerInput,  OfficerId:String!): Share
+
   }
   schema {
     query: RootQuery
