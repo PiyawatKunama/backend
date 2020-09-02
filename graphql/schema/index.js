@@ -14,7 +14,6 @@ module.exports = buildSchema(`
     date: String!
     owner :User!
   }
-
   type AutoId{
     _id: ID!
     memberId: Float!
